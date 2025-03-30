@@ -1,0 +1,116 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: #333;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* 英雄区域样式 */
+.hero {
+    background-image: url('https://dummyimage.com/1200x600/cccccc/000000');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* 精选作业区域样式 */
+.featured {
+    padding: 50px;
+    text-align: center;
+}
+
+.featured h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.assignment {
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.assignment img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.assignment h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.assignment p {
+    margin-bottom: 20px;
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+    
