@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS练习</title>
+    <!-- 外部样式表 -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- 内部样式表 -->
+    <style>
+      h1 {
+        font-family: 楷体;
+        color: brown;
+      }
+      p {
+        text-indent: 2em;
+        line-height: 1.7;
+      }
+      /* 类选择符 */
+      .abstract {
+        font-size: 14px;
+      }
+      h2 {
+        color: coral;
+      }
+      #CSSbase {
+        color: darkgreen;
+      }
+      a:link {
+        color: rgb(87, 87, 197);
+      }
+      a:visited {
+        color: darkgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 内嵌样式表 -->
+    <h1 style="color: darkblue">CSS练习</h1>
+    <h2 id="CSSbase">CSS语法基础</h2>
+    <p class="abstract">
+      这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个
+    </p>
+    <p>
+      这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个这是一个段落，段落中包含了一个
+    </p>
+    <h2>选择符</h2>
+    <p>
+      这是一个段落，段落中包<a href="https://yangzh.cn">含了一个这是一个段落</a
+      >，段落中包含了一个这是一个段落，段落中包含了一个<a href="https://www.sanguo.com"
+        >这是一个段落</a>，段落中包含了一个
+    </p>
+  </body>
+</html>
