@@ -6,51 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <title>GitHub HTML 文件推送日期记录</title>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+    <title>GitHub 文件推送日期总结</title>
 </head>
 
-<body class="bg-gray-100">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold text-center mb-8">GitHub HTML 文件推送日期记录</h1>
-        <div class="mb-4">
-            <label for="token" class="block text-sm font-medium text-gray-700">GitHub 令牌 (可选，用于私有仓库):</label>
-            <input type="password" id="token" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-        </div>
-        <button id="fetchButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            获取推送日期
-        </button>
-        <div id="result" class="mt-8"></div>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">GitHub 文件推送日期总结</h1>
+    <div class="mb-4">
+        <label for="token" class="block text-sm font-medium text-gray-700">GitHub 令牌 (可选，用于私有仓库):</label>
+        <input type="password" id="token"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
     </div>
+    <button id="fetchButton"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        获取推送日期
+    </button>
+    <div id="result" class="mt-8"></div>
+
     <script>
         const repoOwner = "4Xxxxdyy";
         const repoName = "tttt";
-        const filePaths = [
-            "03-css-01.html",
-            "03-css-02.html",
-            "04-css-01.html",
-            "04-css-02-relative.html",
-            "05-Javascript.html",
-            "06-news02.html",
-            "07-Node.html",
-            "gs.html",
-            "index.html"
-        ];
+
         document.getElementById('fetchButton').addEventListener('click', async () => {
             const token = document.getElementById('token').value;
-
             const headers = {};
             if (token) {
                 headers['Authorization'] = `token ${token}`;
             }
-
-            let url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits?path=${filePath}`;
+            // 获取所有文件的提交记录
+            let url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits`;
             const allDates = [];
-
             while (url) {
                 try {
                     const response = await fetch(url, { headers });
@@ -101,30 +85,43 @@
 
             const resultDiv = document.getElementById('result');
             resultDiv.innerHTML = '';
+            const table = document.createElement('table');
+            table.classList.add('w-full', 'border-collapse', 'border', 'border-gray-300');
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const weekHeader = document.createElement('th');
+            weekHeader.textContent = '周次';
+            weekHeader.classList.add('border', 'border-gray-300', 'p-2', 'text-center');
+            const pushHeader = document.createElement('th');
+            pushHeader.textContent = '是否有推送';
+            pushHeader.classList.add('border', 'border-gray-300', 'p-2', 'text-center');
+            headerRow.appendChild(weekHeader);
+            headerRow.appendChild(pushHeader);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            const tbody = document.createElement('tbody');
             for (const [week, dates] of Object.entries(weeklyRecords)) {
-                const weekDiv = document.createElement('div');
-                weekDiv.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4');
-                const weekHeader = document.createElement('h2');
-                weekHeader.classList.add('text-lg', 'font-bold', 'mb-2');
-                weekHeader.textContent = week;
-                weekDiv.appendChild(weekHeader);
-                if (dates.length === 0) {
-                    const noPush = document.createElement('p');
-                    noPush.textContent = '本周无推送';
-                    weekDiv.appendChild(noPush);
+                const row = document.createElement('tr');
+                const weekCell = document.createElement('td');
+                weekCell.textContent = week;
+                weekCell.classList.add('border', 'border-gray-300', 'p-2', 'text-center');
+                const pushCell = document.createElement('td');
+                pushCell.classList.add('border', 'border-gray-300', 'p-2', 'text-center');
+                if (dates.length > 0) {
+                    const checkmark = document.createElement('i');
+                    checkmark.classList.add('fa-solid', 'fa-check', 'text-green-500', 'text-2xl');
+                    pushCell.appendChild(checkmark);
                 } else {
-                    const datesList = document.createElement('ul');
-                    dates.forEach(date => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = new Date(date).toLocaleString();
-                        datesList.appendChild(listItem);
-                    });
-                    weekDiv.appendChild(datesList);
+                    pushCell.textContent = '无';
                 }
-                resultDiv.appendChild(weekDiv);
+                row.appendChild(weekCell);
+                row.appendChild(pushCell);
+                tbody.appendChild(row);
             }
+            table.appendChild(tbody);
+            resultDiv.appendChild(table);
         });
     </script>
 </body>
 
-</html>    
+</html>
