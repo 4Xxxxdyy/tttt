@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <script>
+            class ElectricCar extends Car {
+                charge() 
+// 问题在于代码应该在类的方法内部，且确保 `Car` 类已定义
+// 假设 `Car` 类有 `brand` 和 `model` 属性
+// 这里补充方法的花括号，使代码符合语法规则
+                    {
+                        console.log(`电动汽车${this.brand} ${this.model}正在充电`);
+                    }
+            }
+            let myElectricCar = new ElectricCar('Tesla', 'Model Y',2025,300)
+            myElectricCar.start()
+            myElectricCar.charge()
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
+        
+
