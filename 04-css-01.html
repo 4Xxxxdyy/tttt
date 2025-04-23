@@ -1,98 +1,96 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-    <head>
-
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-        <title>css核心概念:背景、盒模型、布局、动画</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 核心概念：背景、盒模型、布局、动画</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+      }
+      h1 {
+        background-image: url("./images/780.jpg");
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS 核心概念：背景、盒模型、布局、动画</h1>
+    <section>
+      <h2>背景</h2>
+      <div>
+        <p>
+          “cascading” 的音标是 /kæˈskeɪdɪŋ/。如果你想在 HTML 文件里为 linear：
+          英 [ˈlɪniə(r)]美 [ˈlɪniər]
+        </p>
+      </div>
+    </section>
+    <section>
+      <h2>盒模型</h2>
+      <style>
+        .box {
+          width: 200px;
+          height: 200px;
+          border: dashed red 1px;
+          padding: 20px;
+          margin-bottom: 2em;
+          border-radius: 20px;
+        }
+      </style>
+      <div>
+        <div class="box">box 中的内容 1</div>
+        <div class="box">box 中的内容 2</div>
+      </div>
+    </section>
+    <section>
+      <h2>布局</h2>
+      <div>
+        <h3>dispaly 的不同取值</h3>
         <style>
-          body{
-            background-color: #f0f0f0;
-          }
-          h1{
-            background-image: url("./images/780.jpg");
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            text-align: center;
+          .display-demo p {
+            display: inline;
           }
         </style>
-    </head>
-    <body>
-        <h1>css核心概念:背景、盒模型、布局、动画</h1>
-        <section>
-            <h2>背景</h2>
-            <div>
-                <p>
-                    "cascading"的音标是 /kæ'skeɪdɪŋ/.如果你想在 HTML 文件里为 linear:
-                    英[lɪˈnɪjər]美[lɪˈnɪər]
-                </p>
-            </div>
-        </section>
-        <section>
-            <h2>盒模型</h2>
-            <style>
-                .boy{
-                width: 200pxx;
-                height: 200px;
-                border:dashed red 1px;
-                padding: 20px;
-                margin-bottom: 2em;
-                border-radius: 20px;
-               }
-            </style>
-                <div>
-                <div class="box">box中的内容 1</div>
-                <div class="box">box中的内容 2</div>
-                </div>
-                </section>
-                <section>
-                <h2>布局</h2>
-                <div>
-                    <h3>disply的不同取值</h3>
-                    <style>
-                        .display-demo p{
-                        display: inline;
-                       }
-                    </style>
-                    <div class="display-demo">
-                        <p>段1</p>
-                        <p>段2</p>
-                        <p>段3</p>
-                        <p style="display: none;">段4</p>
-                    </div>
-                    <style>
-                        .flex-container{
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: center;
-                        }
-                        .flex-container p{
-                            border: 1px solid red;
-                            margin-right: 1em;
-                            padding: 10px;
-                        }
-                    </style>
-                    <div class="flex-container">
-                        <p>111111111111111</p>
-                        <p>222222</p>
-                        <p>3</p>
-                        <p>4</p>
-                    </div>
-                </div>
-                </section>
-                <section>
-                <h2>动画</h2>
-                动画必须要有起始状态、结束状态、时长
-                <style>
-                    .animate-box{
-                        width: 100px;
-                        height: 100px;
-                        background-color:rgb(192, 184, 184)
-                        text-align: center;
-                        line-height: 100px;
-                        margin-top: 2em;
-                        border-radius: 0;
+        <div class="display-demo">
+          <p>段1</p>
+          <p>段2</p>
+          <p>段3</p>
+          <p style="display: none">段4</p>
+        </div>
+        <style>
+          .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
+          .flex-container p {
+            border: 1px solid red;
+            margin-right: 1em;
+            padding: 10px;
+          }
+        </style>
+        <div class="flex-container">
+          <p>111111111111111111111</p>
+          <p>222222222222222</p>
+          <p>3</p>
+          <p>4</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>动画</h2>
+      动画必须要有起始状态、结束状态、时长
+      <style>
+        .animate-box {
+          width: 100px;
+          height: 100px;
+          background-color: rgb(192, 184, 184);
+          text-align: center;
+          line-height: 100px;
+          margin-top: 2em;
+          border-radius: 0;
         }
         .animate-box:hover {
           border-radius: 100px;
