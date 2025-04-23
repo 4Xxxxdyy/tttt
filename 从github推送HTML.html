@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>GitHub HTML 文件推送日期记录</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold text-center mb-8">GitHub HTML 文件推送日期记录</h1>
+        <div class="mb-4">
+            <label for="token" class="block text-sm font-medium text-gray-700">GitHub 令牌 (可选，用于私有仓库):</label>
+            <input type="password" id="token" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        </div>
+        <button id="fetchButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            获取推送日期
+        </button>
+        <div id="result" class="mt-8"></div>
+    </div>
+    <script>
+        const repoOwner = "4Xxxxdyy";
+        const repoName = "tttt";
+        const filePath = "03-css-01.html/03-css-02.hyml/04-css-01.html/04-css-02-relative.html/05-Javascript.html/06-new02.html/gs.html/index.html";
+
+        document.getElementById('fetchButton').addEventListener('click', async () => {
+            const token = document.getElementById('token').value;
+
+            const headers = {};
+            if (token) {
+                headers['Authorization'] = `token ${token}`;
+            }
+
+            let url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits?path=${filePath}`;
+            const allDates = [];
+
+            while (url) {
+                try {
+                    const response = await fetch(url, { headers });
+                    if (response.ok) {
+                        const commits = await response.json();
+                        commits.forEach(commit => {
+                            allDates.push(commit.commit.committer.date);
+                        });
+                        const linkHeader = response.headers.get('Link');
+                        if (linkHeader) {
+                            const nextLink = linkHeader.split(',').find(link => link.includes('rel="next"'));
+                            if (nextLink) {
+                                url = nextLink.split(';')[0].trim().slice(1, -1);
+                            } else {
+                                url = null;
+                            }
+                        } else {
+                            url = null;
+                        }
+                    } else {
+                        console.error('请求失败:', response.status);
+                        break;
+                    }
+                } catch (error) {
+                    console.error('发生错误:', error);
+                    break;
+                }
+            }
+
+            const startDate = new Date('2025-03-03');
+            const endDate = new Date('2025-06-22');
+            const weeklyRecords = {};
+
+            let currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+                const weekEnd = new Date(currentDate);
+                weekEnd.setDate(weekEnd.getDate() + 6);
+                const weekLabel = `${currentDate.toISOString().split('T')[0]} - ${weekEnd.toISOString().split('T')[0]}`;
+                weeklyRecords[weekLabel] = [];
+                allDates.forEach(date => {
+                    const commitDate = new Date(date);
+                    if (commitDate >= currentDate && commitDate <= weekEnd) {
+                        weeklyRecords[weekLabel].push(date);
+                    }
+                });
+                currentDate.setDate(currentDate.getDate() + 7);
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            for (const [week, dates] of Object.entries(weeklyRecords)) {
+                const weekDiv = document.createElement('div');
+                weekDiv.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4');
+                const weekHeader = document.createElement('h2');
+                weekHeader.classList.add('text-lg', 'font-bold', 'mb-2');
+                weekHeader.textContent = week;
+                weekDiv.appendChild(weekHeader);
+                if (dates.length === 0) {
+                    const noPush = document.createElement('p');
+                    noPush.textContent = '本周无推送';
+                    weekDiv.appendChild(noPush);
+                } else {
+                    const datesList = document.createElement('ul');
+                    dates.forEach(date => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = new Date(date).toLocaleString();
+                        datesList.appendChild(listItem);
+                    });
+                    weekDiv.appendChild(datesList);
+                }
+                resultDiv.appendChild(weekDiv);
+            }
+        });
+    </script>
+</body>
+
+</html>    
