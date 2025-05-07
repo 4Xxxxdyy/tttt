@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 语法练习2</title>
+    <script>
+        // 类和对象
+        // 1. 定义一个类
+        class Student {
+            // 构造函数
+            constructor(name, age, school, grade) {
+                this.name = name;
+                this.age = age;
+                this.school = school;
+                this.grade = grade;
+            }
+            // 方法
+            learn(subject = "语文") {
+                console.log(`${this.name}正在学习${subject}，真棒！`);
+            }
+            exam() {
+                console.log(`${this.name} 正在考试`);
+            }
+        }
+        // 2. 创建对象
+        let xiaoming = new Student("小明", 7, "实验小学", 1);
+        xiaoming.learn("英语");
+        xiaoming.exam();
+
+        class Undergraduate extends Student {
+            constructor(name, age, school, grade, major, experience) {
+                super(name, age, school, grade);
+                this.major = major;
+                this.experience = experience;
+            }
+
+            intern(corp) {
+                console.log(`${this.name}在${corp}实习，获得经验值1000`);
+                console.log(super.exam())
+            }
+        }
+
+        let xiaoming2 = new Undergraduate("小明", 17, "科技大学", 1, "新闻学", 0);
+        xiaoming2.intern("腾讯");
+
+        // 回调函数，函数作为参数传递给另一个函数
+        console.log("111111");
+
+        setTimeout(function () { console.log("222222") }, 1000);
+
+        console.log("333333");
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1 id="demo" onclick="alert('你点我干啥！')">这是一个标题的原始内容</h1>
+    <div>
+        <p id="anotherp">这是一个段落</p>
+    </div>
+
+    <script>
+        let myh1 = document.getElementById("demo");
+        console.log(myh1);
+        // 1. 改变元素的内容
+        myh1.innerHTML = "这是来自脚本的动态内容";
+        // 2. 改变元素的样式
+        myh1.style.color = "#888";
+
+        let myp = document.getElementById("anotherp");
+        myp.onclick = function () {
+            alert("你好啊！");
+        }
+
+        window.onload = function () {
+            alert("页面加载完成");
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
+        
+

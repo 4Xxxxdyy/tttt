@@ -1,24 +1,65 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <script>
-            class ElectricCar extends Car {
-                charge() 
-// 问题在于代码应该在类的方法内部，且确保 `Car` 类已定义
-// 假设 `Car` 类有 `brand` 和 `model` 属性
-// 这里补充方法的花括号，使代码符合语法规则
-                    {
-                        console.log(`电动汽车${this.brand} ${this.model}正在充电`);
-                    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 语法</title>
+    <script>
+        // 类和对象
+         class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
             }
-            let myElectricCar = new ElectricCar('Tesla', 'Model Y',2025,300)
-            myElectricCar.start()
-            myElectricCar.charge()
-        </script>
-    </head>
-    <body>
-
-    </body>
-</html>
+            start() {
+                console.log(`汽车 ${this.brand} ${this.model}启动了`);
+            }
+            stop() {
+                console.log(`汽车 ${this.brand} ${this.model}停止了`);
+            }
         
+        }
+        let myCar = new Car("mi", "Yu7", 2025);
+        myCar.start()
+        myCar.stop()
+    
+        class ElectricCar extends Car {
+            constructor(brand, model, year, range) {
+                super(brand, model, year)
+                this.range = range
+            }
+            charge() {
+                console.log(`电动汽车 ${this.brand} ${this.model} 正在充电`)
+            }
+        }
+        let myElectricCar = new ElectricCar('Tesla', 'Model Y', 2025, 300)
+        myElectricCar.start()
+        myElectricCar.charge()
 
+        // 回调函数练习
+        console.log('111111')
+
+        setTimeout(function () {
+            console.log('22222')
+        }, 2000)
+
+        console.log('333333')
+    </script>
+</head>
+
+<body>
+    <h1 onclick="alert('我被点击了！')">JavaScript 语法</h1>
+    <div id="demo">div content</div>
+</body>
+
+<script>
+    myDom = document.getElementById('demo')
+    console.log(myDom)
+    myDom.innerHTML = '这是从脚本动态更改的内容'
+    myDom.onclick = function () {
+        alert('我也被点击了！')
+    }
+</script>
+
+</html>
