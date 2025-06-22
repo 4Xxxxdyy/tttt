@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import ExerciseCard from '@/components/ExerciseCard'
+import ExerciseCard from '@/app/components/ExerciseCard'
 
 // ⚠️ 替换为你的真实练习数据
 const exercises = [
