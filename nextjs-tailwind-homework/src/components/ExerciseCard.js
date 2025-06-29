@@ -1,15 +1,5 @@
-// src/components/ExerciseCard.js
-import React from "react";
-
-/**
- * ExerciseCard 组件
- * @param {object} props - 组件属性
- * @param {string} props.title - 练习标题
- * @param {string} props.description - 练习描述
- * @param {string} props.imageUrl - 图片URL (来自Unsplash)
- * @param {string} props.link - 练习链接 (可选)
- * @param {string[]} props.tags - 练习相关的技术标签 (可选)
- */
+"use client";
+import React, { useState } from "react"; // 1. 引入 useState
 export default function ExerciseCard({
   title,
   description,
@@ -17,12 +7,18 @@ export default function ExerciseCard({
   link,
   tags,
 }) {
+  // 2. 声明 State 变量来管理收藏状态
+  // 初始状态为未收藏 (false)
+  const [isFavorited, setIsFavorited] = useState(false);
+  // 4. 创建事件处理函数来切换收藏状态
+  const handleToggleFavorite = () => {
+    setIsFavorited(!isFavorited); // 将 isFavorited 的值取反
+  };
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-      {/* 图片区域 - Unsplash图片将在这里显示 */}
       <img
         className="w-full h-48 object-cover"
-        src={imageUrl} // 默认占位图
+        src={imageUrl}
         alt={title || "Exercise Image"}
       />
       <div className="p-6">
@@ -32,7 +28,6 @@ export default function ExerciseCard({
         <p className="text-gray-600 text-sm mb-4 leading-relaxed">
           {description || "这里是练习的简要描述，介绍练习的主要内容和目标。"}
         </p>
-        {/* 技术标签 */}
         {tags && tags.length > 0 && (
           <div className="mb-4">
             {tags.map((tag, index) => (
@@ -45,20 +40,35 @@ export default function ExerciseCard({
             ))}
           </div>
         )}
-        {/* 操作按钮 */}
-        {link && (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-rose-600 text-white px-6 py-2 rounded-md font-medium
-                       transform transition-transform duration-200 hover:scale-105 hover:bg-rose-700
-                       focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50"
+        <div className="flex items-center justify-between mt-4">
+          {/* 查看练习按钮 */}
+          {link ? (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-rose-600 text-white px-6 py-2 rounded-md font-medium
+                         transform transition-transform duration-200 hover:scale-105 hover:bg-rose-700
+                         focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50"
+            >
+              查看练习
+            </a>
+          ) : (
+            <p className="text-sm text-gray-400">暂无在线链接</p>
+          )}
+          {/* 3. & 5. 添加收藏按钮并根据 State 更新 UI */}
+          <button
+            onClick={handleToggleFavorite}
+            className={`px-4 py-2 rounded-md font-medium text-sm transition-colors duration-200
+                        ${
+                          isFavorited
+                            ? "bg-amber-500 text-white hover:bg-amber-600" // 已收藏样式
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300" // 未收藏样式
+                        }`}
           >
-            查看练习
-          </a>
-        )}
-        {!link && <p className="text-sm text-gray-400">暂无在线链接</p>}
+            {isFavorited ? "已收藏 ★" : "收藏 ☆"}
+          </button>
+        </div>
       </div>
     </div>
   );

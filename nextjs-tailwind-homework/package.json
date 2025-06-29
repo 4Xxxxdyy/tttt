@@ -1,3 +1,4 @@
+
 {
   "dependencies": {
     "next": "15.3.2",
@@ -12,7 +13,7 @@
   "private": true,
   "scripts": {
     "build": "rm -rf ../docs && next build",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "lint": "next lint",
     "start": "next start"
   },
